@@ -1,14 +1,13 @@
-import express from 'express'
+import express from "express";
+import routes from "./routes";
+import morgan from "morgan";
 
-const app = express()
+const app = express();
 
-app.get('/users', (req, res, next) => {
-  console.log('Acessou a rota')
-  return res.json({user: 'john'})
-})
-
-
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(routes);
 
 app.listen(3333, () => {
-  console.log('Server listening on port 3333')
-})
+  console.log("Server listening on port 3333");
+});
