@@ -1,10 +1,19 @@
 import express from "express";
+import db from "./database/connection";
 
 const routes = express.Router();
 
-routes.get("/users", (req, res, next) => {
-  console.log("Acessou a rota");
-  return res.json({ user: "john" });
+routes.post("/classes", async (request, response) => {
+  const { name, avatar, whatsapp, bio, subject, cost, schedule } = request.body;
+
+  await db("users").insert({
+    name,
+    avatar,
+    whatsapp,
+    bio,
+  });
+
+  return response.send();
 });
 
 export default routes;
